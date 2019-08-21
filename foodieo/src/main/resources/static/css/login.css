@@ -1,0 +1,16 @@
+body{
+ background:#bbe6fa;
+
+}
+
+.container{
+ background-color:#0076fb;
+ width: 430px;
+ height: inherit;
+ margin:  auto;
+ margin-top: 35px;
+ border-radius: 5px;
+ padding: 10px;
+}
+
+

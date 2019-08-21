@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/login.css">
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand btn btn-outline-dark" href="/" style=""><h3>Foodieoo</h3></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto justify-content-center">
+
+            <li class="nav-item active">
+                <a class="nav-link" style="color: white" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  href="writeblog">Write article</a>
+            </li>
+<!--            <li class="nav-item dropdown">-->
+<!--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"-->
+<!--                   style="color: white"aria-haspopup="true" aria-expanded="false">-->
+<!--                    Dropdown-->
+<!--                </a>-->
+<!--                <div class="dropdown-menu" style="color: white" aria-labelledby="navbarDropdown">-->
+<!--                    <a class="dropdown-item" href="#">Action</a>-->
+<!--                    <a class="dropdown-item" href="#">Another action</a>-->
+<!--                    <div class="dropdown-divider"></div>-->
+<!--                    <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                </div>-->
+<!--            </li>-->
+            <li>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </li>
+        </ul>
+        <div style="display: inline;float: right">
+            <ul class="navbar-nav mr-auto" >
+                <li class="nav-item active">
+                    <a class="nav-link btn btn-outline-dark"  href="login" style="padding-left: 20px;padding-right: 20px;">
+                        Sign In
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>&nbsp;&nbsp;
+                <li class="nav-item active">
+                    <a class="nav-link btn btn-outline-dark"  href="register" style="padding-left: 20px;padding-right: 20px;">
+                        Sign Up
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+
+
+<div class="container">
+
+
+    <form method="post" th:object="${bloggerLogin}">
+        <div class="form-group">
+                <span class="badge badge-danger" th:if="${errorMessage} == 'yes'">
+                    Wrong email / password!
+                </span>
+        </div>
+
+        <div>
+            <span class="badge badge-danger" th:if="@{#fields.hasErrors(emailId)}" th:errors="*{emailId}">Errors</span>
+        </div>
+        <div class="form-group">
+            <label for="emailId">Email address:</label>
+            <input type="email" class="form-control" id="emailId" th:field="*{emailId}"
+                   placeholder="Enter a valid email id" style="width: 400px">
+        </div>
+        <div>
+            <span class="badge badge-danger" th:if="@{#fields.hasErrors(password)}" th:errors="*{password}">Errors</span>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}"
+                   placeholder="Enter a valid password" style="width: 400px">
+        </div>
+
+        <button type="submit" class="btn btn-dark">Login</button>
+    </form>
+</div>
+
+</body>
+</html>
+
+

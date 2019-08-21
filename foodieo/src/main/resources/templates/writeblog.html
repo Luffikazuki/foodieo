@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--    <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>-->
+<!--    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>-->
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.3.1/classic/ckeditor.js"></script>
+
+    <link rel="stylesheet" href="/css/writeblog.css">
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand btn btn-outline-dark" href="/" style=""><h3>Foodieoo</h3></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto justify-content-center">
+
+            <li class="nav-item active">
+                <a class="nav-link" style="color: white" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  href="#">Write article</a>
+            </li>
+            <li>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </li>
+        </ul>
+        <div style="display: inline;float: right" th:if="${loggedIn} == 'yes'">
+            <div class="dropdown">
+                <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span th:text="${blogger.userName}">User name</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/">Logout</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+
+
+<div class="container">
+    <br>
+
+    <form method="post" th:object="${blog}">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}">
+        </div>
+        <div class="form-group">
+            <label for="summary">Summary:</label>
+            <textarea id="summary"  rows="2" name="summary" class="form-control" th:field="*{summary}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="blogBody">Article content:</label>
+            <textarea id="blogBody"  rows="5" name="blogBody" class="form-control" th:field="*{blogBody}"></textarea>
+            <script>
+                ClassicEditor
+                    .create( document.querySelector( '#blogBody' ) )
+                    .then( editor => {
+                    console.log( editor );
+                } )
+                .catch( error => {
+                    console.error( error );
+                } );
+            </script>
+        </div>
+
+        <button type="submit" class="btn btn-dark btn-block">Submit</button>
+    </form>
+
+</div>
+
+</body>
+
+</html>
+
+

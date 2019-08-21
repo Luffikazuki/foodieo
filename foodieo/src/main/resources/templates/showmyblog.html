@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/showblog.css">
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand btn btn-outline-dark" href="/" style=""><h3>Foodieoo</h3></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto justify-content-center">
+
+            <li class="nav-item active">
+                <a class="nav-link" style="color: white" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  href="writeblog">Write article</a>
+            </li>
+            <li>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </li>
+        </ul>
+
+        <div style="display: inline;float: right" th:if="${loggedIn} == 'yes'">
+            <div class="dropdown">
+                <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span th:text="${blogger.userName}">User name</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/">Logout</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container" th:if="${blogExist} == 'no'">
+    <article class="showblog">
+        <h2>No blog exist! foodieoo</h2>
+        <span class="badge badge-info"> Click write article to write a blog</span>
+    </article>
+</div>
+
+<div class="container" th:if="${blogExist} == 'yes'" th:each="blog :${blogs}">
+
+    <article class="showblog">
+        <h2 th:text="${blog.title}">Java programming language</h2>
+        <p>Posted on : <span th:text="${blog.createdOn}">August 20 2018</span></p>
+        <hr>
+        <h5>Summary:</h5>
+        <p th:text="${blog.summary}">This is a go through of what is java programming language</p>
+        <hr>
+        <h5>Body</h5>
+        <div th:utext="${blog.blogBody}"></div>
+<!--        <p>-->
+<!--            It is Object oriented programming language. It used top down approach.<br>-->
+<!--            Java is class driven.-->
+<!--        </p>-->
+        <hr>
+        <p>
+            <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#manageThisBlog"
+                    aria-expanded="false" aria-controls="manageThisBlog">
+                Manage this blog
+            </button>
+        </p>
+        <div class="collapse" id="manageThisBlog">
+            <a class="btn btn-info" th:href="@{'/editblog/' + ${blog.id}}"  role="button">Edit</a>
+            <a class="btn btn-danger" th:href="@{'/deleteblog/' + ${blog.id}}"  role="button">Delete</a>
+        </div>
+    </article>
+
+</div>
+
+</body>
+
+</html>
+
+
